@@ -19,13 +19,11 @@ const UserForm = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (selectedUser.id) {
+    if (selectedUser?.id) {
       // cập nhật
-      console.log("updated")
       dispatch(updateUser(selectedUser.id, values));
     } else {
       // thêm mới
-      console.log("created");
       dispatch(createUser(values));
     }
   };
