@@ -17,14 +17,18 @@ const UserForm = () => {
     setValues((values) => ({ ...values, [name]: value }));
   };
 
+  const onSuccess = () => {
+    setValues({ id: "", phone: "", name: "", email: "" });
+  };
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (selectedUser?.id) {
       // cập nhật
-      dispatch(updateUser(selectedUser.id, values));
+      dispatch(updateUser(selectedUser.id, values, onSuccess));
     } else {
       // thêm mới
-      dispatch(createUser(values));
+      dispatch(createUser(values, onSuccess));
     }
   };
 

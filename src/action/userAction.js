@@ -14,7 +14,7 @@ export const getUser = () => {
   };
 };
 
-export const createUser = (user) => {
+export const createUser = (user, onSuccess) => {
   return async (dispatch) => {
     try {
       await axios.post(
@@ -23,6 +23,7 @@ export const createUser = (user) => {
       );
 
       dispatch(getUser());
+      onSuccess();
     } catch (error) {}
   };
 };
@@ -55,7 +56,7 @@ export const getUserDetail = (userId) => {
   };
 };
 
-export const updateUser = (userId, user) => {
+export const updateUser = (userId, user, onSuccess) => {
   return async (dispatch) => {
     try {
       await axios.put(
@@ -64,6 +65,7 @@ export const updateUser = (userId, user) => {
       );
 
       dispatch(getUser());
+      onSuccess();
     } catch (error) {}
   };
 };
