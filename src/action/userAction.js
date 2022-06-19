@@ -3,8 +3,15 @@ import axios from "axios";
 export const getUser = () => {
   return async (dispatch, getState) => {
     try {
+      const { searchValue } = getState().user;
+
       const response = await axios.get(
-        "https://62ab04ea371180affbdf4975.mockapi.io/users"
+        "https://62ab04ea371180affbdf4975.mockapi.io/users",
+        {
+          params: {
+            name: searchValue,
+          },
+        }
       );
 
       dispatch({ type: "GET_USERS", users: response.data });
@@ -68,4 +75,8 @@ export const updateUser = (userId, user, onSuccess) => {
       onSuccess();
     } catch (error) {}
   };
+};
+
+export const changeValue = (value) => {
+  return { type: "CHANGE_SEARCH_VALUE", value };
 };
