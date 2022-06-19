@@ -4,7 +4,6 @@ export const getUser = () => {
   return async (dispatch, getState) => {
     try {
       const { searchValue } = getState().user;
-
       const response = await axios.get(
         "https://62ab04ea371180affbdf4975.mockapi.io/users",
         {

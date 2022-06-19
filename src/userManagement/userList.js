@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUser, deleteUser, getUserDetail } from "../action/userAction";
+import {  deleteUser, getUserDetail } from "../action/userAction";
 
 const UserList = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getUser());
-    return () => {};
-  }, []);
-
+  
   const handleDelete = (userId) => {
     dispatch(deleteUser(userId));
   };
