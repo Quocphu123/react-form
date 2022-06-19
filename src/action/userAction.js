@@ -54,3 +54,16 @@ export const getUserDetail = (userId) => {
     }
   };
 };
+
+export const updateUser = (userId, user) => {
+  return async (dispatch) => {
+    try {
+      await axios.put(
+        `https://62ab04ea371180affbdf4975.mockapi.io/users/${userId}`,
+        user
+      );
+
+      dispatch(getUser());
+    } catch (error) {}
+  };
+};

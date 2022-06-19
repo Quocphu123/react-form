@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createUser } from "../action/userAction";
+import { createUser, updateUser } from "../action/userAction";
 const UserForm = () => {
   const [values, setValues] = useState({
     id: "",
@@ -8,6 +8,7 @@ const UserForm = () => {
     name: "",
     email: "",
   });
+  const selectedUser = useSelector((state) => state.user.selectedUser);
 
   const dispatch = useDispatch();
 
@@ -18,20 +19,24 @@ const UserForm = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-
-    dispatch(createUser(values));
+    if (selectedUser.id) {
+      // cập nhật
+      console.log("updated")
+      dispatch(updateUser(selectedUser.id, values));
+    } else {
+      // thêm mới
+      console.log("created");
+      dispatch(createUser(values));
+    }
   };
 
-  const selectedUser= useSelector((state) => state.user.selectedUser);
-
   useEffect(() => {
-    setValues({ values:selectedUser},console.log(values))
+    setValues({ ...selectedUser });
   }, [selectedUser]);
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="row">
-      {console.log(values)}
-
         <div className="col-sm-6">
           <div className="mb-3">
             <label htmlFor="ID">Mã Sinh Viên:</label>
