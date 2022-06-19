@@ -40,3 +40,17 @@ export const deleteUser = (userId) => {
     }
   };
 };
+
+export const getUserDetail = (userId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(
+        `https://62ab04ea371180affbdf4975.mockapi.io/users/${userId}`
+      );
+
+      dispatch({ type: "GET_USER_DETAIL", user: data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

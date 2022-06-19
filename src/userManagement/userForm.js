@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { createUser } from "../action/userAction";
 const UserForm = () => {
   const [values, setValues] = useState({
@@ -18,13 +18,20 @@ const UserForm = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+
     dispatch(createUser(values));
-  
   };
 
+  const selectedUser= useSelector((state) => state.user.selectedUser);
+
+  useEffect(() => {
+    setValues({ values:selectedUser},console.log(values))
+  }, [selectedUser]);
   return (
     <form onSubmit={handleSubmit}>
       <div className="row">
+      {console.log(values)}
+
         <div className="col-sm-6">
           <div className="mb-3">
             <label htmlFor="ID">Mã Sinh Viên:</label>
@@ -33,6 +40,7 @@ const UserForm = () => {
               type="text"
               name="id"
               className="form-control"
+              value={values.id}
             />
           </div>
           <div className="mb-3">
@@ -42,6 +50,7 @@ const UserForm = () => {
               type="number"
               name="phone"
               className="form-control"
+              value={values.phone}
             />
           </div>
         </div>
@@ -53,6 +62,7 @@ const UserForm = () => {
               type="text"
               name="name"
               className="form-control"
+              value={values.name}
             />
           </div>
           <div className="mb-3">
@@ -62,6 +72,7 @@ const UserForm = () => {
               type="email"
               name="email"
               className="form-control"
+              value={values.email}
             />
           </div>
         </div>

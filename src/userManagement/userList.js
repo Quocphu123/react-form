@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUser, deleteUser } from "../action/userAction";
+import { getUser, deleteUser, getUserDetail } from "../action/userAction";
 
 const UserList = () => {
   const dispatch = useDispatch();
@@ -12,6 +12,10 @@ const UserList = () => {
 
   const handleDelete = (userId) => {
     dispatch(deleteUser(userId));
+  };
+
+  const handleSelected = (userId) => {
+    dispatch(getUserDetail(userId));
   };
 
   const { users } = useSelector((state) => {
@@ -40,7 +44,14 @@ const UserList = () => {
               <td>{user.phone}</td>
               <td>{user.email}</td>
               <td>
-                <button className="btn btn-primary">Cập nhật</button>
+                <button
+                  onClick={() => {
+                    handleSelected(user.id);
+                  }}
+                  className="btn btn-primary"
+                >
+                  Cập nhật
+                </button>
                 <button
                   onClick={() => {
                     handleDelete(user.id);
